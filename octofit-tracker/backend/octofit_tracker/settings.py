@@ -127,3 +127,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Use the custom NoDBTestRunner during tests
 if 'test' in sys.argv:
     TEST_RUNNER = 'octofit_tracker.test_runner.NoDBTestRunner'
+
+# Add Djongo as the database engine
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'octofit_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
+    }
+}
