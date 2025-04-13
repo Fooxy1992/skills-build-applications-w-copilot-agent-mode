@@ -24,6 +24,7 @@ function App() {
           </ul>
         </nav>
         <Routes>
+          <Route path="/" element={<Leaderboard />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/teams" element={<Teams />} />

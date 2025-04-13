@@ -1,6 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework_mongoengine.viewsets import ModelViewSet
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from .models import User, Team, Activity, Leaderboard, Workout
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, LeaderboardSerializer, WorkoutSerializer
 
@@ -27,9 +29,22 @@ class ActivityViewSet(ModelViewSet):
     queryset = Activity.objects
     serializer_class = ActivitySerializer
 
-class LeaderboardViewSet(ModelViewSet):
-    queryset = Leaderboard.objects
-    serializer_class = LeaderboardSerializer
+class LeaderboardAPIView(APIView):
+    def get(self, request):
+        try:
+            leaderboards = Leaderboard.objects.all()
+            data = [leaderboard.to_mongo().to_dict() for leaderboard in leaderboards]
+            return Response(data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def post(self, request):
+        try:
+            leaderboard = Leaderboard(**request.data)
+            leaderboard.save()
+            return Response(leaderboard.to_mongo().to_dict(), status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class WorkoutViewSet(ModelViewSet):
     queryset = Workout.objects

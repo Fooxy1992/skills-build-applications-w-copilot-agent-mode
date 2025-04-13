@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'djongo',
     'corsheaders',
     'octofit_tracker',
 ]
@@ -135,7 +134,7 @@ if 'test' in sys.argv:
 # Configure the database for MongoDB
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
+        'ENGINE': '',  # Empty since we are using pymongo directly
         'NAME': 'octofit_db',
         'HOST': 'localhost',
         'PORT': 27017,
