@@ -141,3 +141,6 @@ DATABASES = {
         'PORT': 27017,
     }
 }
+
+# Add the codespace Django REST API endpoint suffix
+CODESPACE_API_SUFFIX = 'https://potential-halibut-9gw4ggqvxv5h99v-8000.app.github.dev/'
