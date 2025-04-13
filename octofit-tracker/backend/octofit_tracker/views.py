@@ -6,12 +6,13 @@ from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, Lea
 
 @api_view(['GET'])
 def api_root(request, format=None):
+    base_url = 'https://potential-halibut-9gw4ggqvxv5h99v-8000.app.github.dev/'
     return Response({
-        'users': '/api/users/',
-        'teams': '/api/teams/',
-        'activities': '/api/activities/',
-        'leaderboard': '/api/leaderboard/',
-        'workouts': '/api/workouts/'
+        'users': base_url + 'api/users/',
+        'teams': base_url + 'api/teams/',
+        'activities': base_url + 'api/activities/',
+        'leaderboard': base_url + 'api/leaderboard/',
+        'workouts': base_url + 'api/workouts/'
     })
 
 class UserViewSet(ModelViewSet):
