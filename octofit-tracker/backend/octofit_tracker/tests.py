@@ -21,30 +21,26 @@ class TeamTestCase(TestCase):
 
 class ActivityTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create(username="activityuser", email="activityuser@example.com", password="password123")
-        Activity.objects.create(user=user, activity_type="Running", duration="01:00:00")
+        user = User(username="activityuser", email="activityuser@example.com", password="password123").save()
+        Activity(user=user, activity_type="Running", duration="01:00:00").save()
 
     def test_activity_creation(self):
         activity = Activity.objects.get(activity_type="Running")
-        self.assertEqual(activity.activity_type, "Running")
+        self.assertEqual(activity.duration, "01:00:00")
 
 class LeaderboardTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create(username="leaderboarduser", email="leaderboarduser@example.com", password="password123")
-        Leaderboard.objects.create(user=user, score=100)
+        user = User(username="leaderboarduser", email="leaderboarduser@example.com", password="password123").save()
+        Leaderboard(user=user, score=100).save()
 
     def test_leaderboard_creation(self):
         leaderboard = Leaderboard.objects.get(score=100)
-        self.assertEqual(leaderboard.score, 100)
+        self.assertEqual(leaderboard.user.username, "leaderboarduser")
 
 class WorkoutTestCase(TestCase):
     def setUp(self):
-        Workout.objects.create(name="Test Workout", description="This is a test workout.")
+        Workout(name="Yoga", description="Morning Yoga Session").save()
 
     def test_workout_creation(self):
-        workout = Workout.objects.get(name="Test Workout")
-        self.assertEqual(workout.description, "This is a test workout.")
-
-    def tearDown(self):
-        from mongoengine.connection import get_db
-        get_db().client.drop_database('octofit_db')
+        workout = Workout.objects.get(name="Yoga")
+        self.assertEqual(workout.description, "Morning Yoga Session")

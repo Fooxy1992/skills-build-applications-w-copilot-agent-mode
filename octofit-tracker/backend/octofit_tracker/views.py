@@ -23,13 +23,13 @@ class TeamViewSet(ModelViewSet):
     serializer_class = TeamSerializer
 
 class ActivityViewSet(ModelViewSet):
-    queryset = Activity.objects  # Use mongoengine's objects manager
+    queryset = Activity.objects
     serializer_class = ActivitySerializer
 
 class LeaderboardViewSet(ModelViewSet):
-    queryset = Leaderboard.objects  # Use mongoengine's objects manager
+    queryset = Leaderboard.objects
     serializer_class = LeaderboardSerializer
 
 class WorkoutViewSet(ModelViewSet):
-    queryset = Workout.objects  # Use mongoengine's objects manager
+    queryset = Workout.objects
     serializer_class = WorkoutSerializer

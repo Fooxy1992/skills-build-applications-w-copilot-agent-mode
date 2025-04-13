@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'djongo',
     'corsheaders',
     'octofit_tracker',
 ]
@@ -52,8 +53,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+
+# Add CORS middleware
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "octofit_tracker.urls"
 
@@ -128,7 +132,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 if 'test' in sys.argv:
     TEST_RUNNER = 'octofit_tracker.test_runner.NoDBTestRunner'
 
-# Add Djongo as the database engine
+# Configure the database for MongoDB
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
