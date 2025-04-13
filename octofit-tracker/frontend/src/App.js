@@ -5,11 +5,15 @@ import Leaderboard from './components/Leaderboard';
 import Teams from './components/Teams';
 import Users from './components/Users';
 import Workouts from './components/Workouts';
+import Logo from './components/Logo';
 
 function App() {
   return (
     <Router>
       <div>
+        <div className="App-header">
+          <Logo />
+        </div>
         <nav>
           <ul>
             <li><Link to="/activities">Activities</Link></li>
